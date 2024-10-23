@@ -58,3 +58,5 @@ jobs:
           git add changelog.txt
           git commit -m "Update changelog.txt for issue #${{ github.event.issue.number }} with decision"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
