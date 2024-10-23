@@ -4,6 +4,9 @@ on:
   issue_comment:
     types: [created, edited]
 
+permissions:
+  contents: write  # Ensure write permissions for GITHUB_TOKEN
+
 jobs:
   decision_comment_job:
     runs-on: ubuntu-latest
