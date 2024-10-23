@@ -1,20 +1,57 @@
-name: Listen for Issue Comment Changes
+name: Listen for Decision Comments
 
 on:
   issue_comment:
-    types: [created, edited, deleted]
+    types: [created, edited]
 
 jobs:
-  comment_change_job:
+  decision_comment_job:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Print event information
+      # Step 2: Set up Git for committing changes
+      - name: Set up Git
         run: |
-          echo "Comment action: ${{ github.event.action }}"
-          echo "Comment body: ${{ github.event.comment.body }}"
-          echo "Comment URL: ${{ github.event.comment.html_url }}"
-          echo "Issue URL: ${{ github.event.issue.html_url }}"
-          echo "Issue number: ${{ github.event.issue.number }}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 3: Check if the comment starts with "Decision#"
+      - name: Append filtered comment to changelog.txt
+        run: |
+          COMMENT_BODY="${{ github.event.comment.body }}"
+          
+          # Check if the comment starts with "Decision#"
+          if [[ "$COMMENT_BODY" == Decision#* ]]; then
+            # Remove the "Decision#" prefix
+            CLEANED_COMMENT="${COMMENT_BODY#Decision#}"
+
+            # Get the timestamp and other details
+            TIMESTAMP=$(date)
+            COMMENT_URL="${{ github.event.comment.html_url }}"
+            ISSUE_URL="${{ github.event.issue.html_url }}"
+            ISSUE_NUMBER="${{ github.event.issue.number }}"
+            ISSUE_TITLE="${{ github.event.issue.title }}"
+            COMMENT_AUTHOR="${{ github.event.comment.user.login }}"
+            
+            # Ensure changelog.txt exists, then append the cleaned comment
+            echo "### $TIMESTAMP" >> changelog.txt
+            echo "Decision by: $COMMENT_AUTHOR" >> changelog.txt
+            echo "Comment URL: $COMMENT_URL" >> changelog.txt
+            echo "Issue URL: $ISSUE_URL" >> changelog.txt
+            echo "Issue number: $ISSUE_NUMBER" >> changelog.txt
+            echo "Issue title: $ISSUE_TITLE" >> changelog.txt
+            echo "Decision: $CLEANED_COMMENT" >> changelog.txt
+            echo "-----------------------------" >> changelog.txt
+          else
+            echo "Comment does not start with 'Decision#'. Skipping."
+          fi
+
+      # Step 4: Commit and push changes
+      - name: Commit and push changes
+        run: |
+          git add changelog.txt
+          git commit -m "Update changelog.txt for issue #${{ github.event.issue.number }} with decision"
+          git push
