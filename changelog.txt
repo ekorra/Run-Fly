@@ -1,1 +1,9 @@
 
+### Wed Oct 23 12:27:27 UTC 2024
+Decision by: ekorra
+Comment URL: https://github.com/ekorra/Sogn-Run-Fly/issues/1#issuecomment-2431979434
+Issue URL: https://github.com/ekorra/Sogn-Run-Fly/issues/1
+Issue number: 1
+Issue title: Test issue
+Decision: Dette er enda en beslutning
+-----------------------------
