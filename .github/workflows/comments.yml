@@ -1,0 +1,20 @@
+name: Listen for Issue Comment Changes
+
+on:
+  issue_comment:
+    types: [created, edited, deleted]
+
+jobs:
+  comment_change_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Print event information
+        run: |
+          echo "Comment action: ${{ github.event.action }}"
+          echo "Comment body: ${{ github.event.comment.body }}"
+          echo "Comment URL: ${{ github.event.comment.html_url }}"
+          echo "Issue URL: ${{ github.event.issue.html_url }}"
+          echo "Issue number: ${{ github.event.issue.number }}"
