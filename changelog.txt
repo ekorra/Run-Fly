@@ -23,3 +23,13 @@ Issue number: 2
 Issue title: New issue
 Decision: aslødifløidajflpiajf
 -----------------------------
+### Fri Oct 25 07:48:18 UTC 2024
+Decision by: ekorra
+Comment URL: https://github.com/ekorra/Sogn-Run-Fly/issues/1#issuecomment-2437122841
+Issue URL: https://github.com/ekorra/Sogn-Run-Fly/issues/1
+Issue number: 1
+Issue title: Test issue
+Decision: test linje 1
+linje2
+osv
+-----------------------------
