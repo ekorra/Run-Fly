@@ -15,3 +15,11 @@ Issue number: 1
 Issue title: Test issue
 Decision: Her er det enda en beslutning
 -----------------------------
+### Fri Oct 25 07:46:35 UTC 2024
+Decision by: ekorra
+Comment URL: https://github.com/ekorra/Sogn-Run-Fly/issues/2#issuecomment-2437119864
+Issue URL: https://github.com/ekorra/Sogn-Run-Fly/issues/2
+Issue number: 2
+Issue title: New issue
+Decision: aslødifløidajflpiajf
+-----------------------------
